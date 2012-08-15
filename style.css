@@ -1,0 +1,154 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+html, body {
+    background: #222;
+    color: #ddd;
+    font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    line-height: 1em;
+}
+
+p {
+    margin-bottom: 1em;
+    text-align: justify;
+    line-height: 1.2em;
+}
+
+p a, p a:visited {
+    color: #C0DB5A;
+    text-decoration: none;
+}
+
+p a:hover {
+	color: #C0DB5A;
+    text-decoration: underline;
+}
+
+#sitecontainer {
+    width: 1050px;
+    margin: auto;
+    margin-top: 1em;
+}
+
+#sidebar {
+    width: 224px;
+}
+#thumbnav a {
+    float: left;
+    display: block;
+}
+#thumbnav img {
+    border: 2px solid #fff;
+    margin: 5px;
+    width: 60px;
+    height: 60px;
+}
+#thumbnav .current {
+    border: 5px solid #fff;
+    margin: 2px;
+}
+#thumbnav img:hover {
+    border: 5px solid #fff;
+    margin: 2px;
+}
+#thumbnav-paging {
+    clear: both;
+    padding-top: 1em;
+}
+#thumbnav-paging div {
+    margin: auto;
+    margin-top: 0.5em;
+    width: 50%;
+    text-align: center;
+}
+#thumbnav-paging .back {
+    float: left;
+    margin-left: 1em;
+}
+#thumbnav-paging .next {
+    float: right;
+    margin-right: 1em;
+}
+#albumnav {
+    width: 200px;
+    margin: auto;
+    padding-bottom: 2em;
+}
+#albumnav input {
+    border: none;
+    background: url('arrow-right-tiny.png') no-repeat center #3a3a3a;
+    color: #ddd;
+    font-weight: bold;
+    float: right;
+    width: 1.2em;
+    height: 1.5em;
+    cursor: pointer;
+}
+#albumnav .select {
+    width: 175px;
+    overflow: hidden;
+}
+#albumnav .select select {
+    background: #3a3a3a;
+    border: none;
+    width: 200px;
+    height: 1.5em;
+    color: #ddd;
+    cursor: pointer;
+}
+
+#info {
+    clear: both;
+    border-top: 1px solid #aaa;
+    margin-top: 3em;
+    padding-top: 0.5em;
+    text-align: center;
+}
+#info a {
+    margin: 0 1em;
+}
+
+#infobox {
+    width: 500px;
+    margin: auto;
+    margin-top: 6em;
+    margin-bottom: 6em;
+    padding: 4em 2em;
+    border-left: 1px solid #aaa;
+    border-right: 1px solid #aaa;
+    font-size: 0.8em;
+    position: relative;
+}
+
+#infobox .home {
+    position: absolute;
+    top: 1em;
+    right: 2em;
+}
+
+#imagecontainer {
+    height: 805px;
+    width: 805px;
+    text-align: center;
+}
+#imagecontainer img {
+    max-width: 800px;
+    max-height: 800px;
+    width: expression((this.width > 800 && (this.height * 800 / this.width) < 800) ? 800: true);
+    height: expression((this.height > 800 && (this.width * 800 / this.height) < 800) ? 800: true);
+}
+#imagecontainer .navi {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    width: 25%;
+    background: transparent;
+    display: block;
+}
+#imagecontainer .back       {left: 0; background: url('arrow-left-big.png') no-repeat -10000px -10000px transparent;}
+#imagecontainer .back:hover {background: url('arrow-left-big.png') no-repeat right center transparent;}
+#imagecontainer .next       {right: 0; background: url('arrow-right-big.png') no-repeat 10000px 10000px transparent;}
+#imagecontainer .next:hover {background: url('arrow-right-big.png') no-repeat left center transparent;}
