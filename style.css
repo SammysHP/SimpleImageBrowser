@@ -144,11 +144,11 @@ p a:hover {
     position: absolute;
     height: 100%;
     top: 0;
-    width: 25%;
+    width: 40%;
     background: transparent;
     display: block;
 }
 #imagecontainer .back       {left: 0; background: url('arrow-left-big.png') no-repeat -10000px -10000px transparent;}
-#imagecontainer .back:hover {background: url('arrow-left-big.png') no-repeat right center transparent;}
+#imagecontainer .back:hover {background: url('arrow-left-big.png') no-repeat center center transparent;}
 #imagecontainer .next       {right: 0; background: url('arrow-right-big.png') no-repeat 10000px 10000px transparent;}
-#imagecontainer .next:hover {background: url('arrow-right-big.png') no-repeat left center transparent;}
+#imagecontainer .next:hover {background: url('arrow-right-big.png') no-repeat center center transparent;}
