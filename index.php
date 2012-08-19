@@ -18,10 +18,18 @@
 
 error_reporting(0);
 
+session_start();
+
 include('config.php');
 
 function generateImageUrl($album, $image) {
     return '?album=' . rawurlencode($album) . '&amp;image=' . rawurlencode($image);
+}
+
+$smallSize = (boolean) $_SESSION['smallsize'];
+if (isset($_GET['togglesize'])) {
+    $smallSize = !$smallSize;
+    $_SESSION['smallsize'] = $smallSize;
 }
 
 if (isset($_POST['album'])) {
@@ -85,6 +93,7 @@ $neighbors = array_slice($images, $pagingStart, $config['paginginterval']);
     <title><?php echo $config['sitetitle'] . ((!isset($_GET['info'])) ? (' :: ' . htmlspecialchars($image)) : ' :: Info'); ?></title>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" type="text/css" href="style.css" />
+    <?php if ($smallSize)  echo '<link rel="stylesheet" type="text/css" href="style_small.css" />'; ?>
 </head>
 <body>
 <?php
@@ -94,7 +103,7 @@ if (isset($_GET['info'])) {
 ?>
     <table border="0" cellspacing="0" cellpadding="0" id="sitecontainer">
         <tr>
-            <td>
+            <td id="sidebarcontainer">
                 <div id="sidebar">
                     <form action="" method="post" id="albumnav">
                         <input type="submit" name="albumselect" value="" />
@@ -137,6 +146,7 @@ if (isset($_GET['info'])) {
                     </div>
                     <div id="info">
                         <a href="?random" title="Random"><img src="random.png" /></a>
+                        <a href="<?php echo generateImageUrl($album, $images[$currentIndex]); ?>&amp;togglesize" title="Toggle size"><img src="size.png" /></a>
                         <?php
                         if ($config['homeurl'] != "") {
                             echo '<a href="' . $config['homeurl'] . '" title="Home"><img src="home.png" /></a>';

@@ -1,0 +1,10 @@
+#imagecontainer {
+    height: 605px;
+    width: 605px;
+}
+#imagecontainer img {
+    max-width: 600px;
+    max-height: 600px;
+    width: expression((this.width > 600 && (this.height * 600 / this.width) < 600) ? 600: true);
+    height: expression((this.height > 600 && (this.width * 600 / this.height) < 600) ? 600: true);
+}
