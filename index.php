@@ -22,18 +22,16 @@ session_start();
 
 include('config.php');
 
-function generateImageUrl($album, $image) {
-    return '?album=' . rawurlencode($album) . '&amp;image=' . rawurlencode($image);
-}
-
-$smallSize = (boolean) $_SESSION['smallsize'];
-if (isset($_GET['togglesize'])) {
-    $smallSize = !$smallSize;
-    $_SESSION['smallsize'] = $smallSize;
+function generateImageUrl($album, $image = null, $html = true) {
+    $url = '?album=' . rawurlencode($album);
+    if ($image != null) {
+        $url .= ($html ? '&amp;' : '&') . 'image=' . rawurlencode($image);
+    }
+    return $url;
 }
 
 if (isset($_POST['album'])) {
-    header('Location: ?album=' . rawurlencode($_POST['album']));
+    header('Location: ' . generateImageUrl($_POST['album']));
     die();
 }
 
@@ -42,6 +40,13 @@ $random = false;
 
 $album = $_GET['album'];
 $image = $_GET['image'];
+
+$smallSize = (boolean) $_SESSION['smallsize'];
+if (isset($_GET['togglesize'])) {
+    $_SESSION['smallsize'] = !$smallSize;
+    header('Location: ' . generateImageUrl($album, $image, false));
+    die();
+}
 
 // Random image if no album and no image given or $_GET['random']
 if (isset($_GET['random']) || ($album == null && $image == null)) {
@@ -146,7 +151,7 @@ if (isset($_GET['info'])) {
                     </div>
                     <div id="info">
                         <a href="?random" title="Random"><img src="random.png" /></a>
-                        <a href="<?php echo generateImageUrl($album, $images[$currentIndex]); ?>&amp;togglesize" title="Toggle size"><img src="size.png" /></a>
+                        <a href="<?php echo generateImageUrl($album, $image); ?>&amp;togglesize" title="Toggle size"><img src="size.png" /></a>
                         <?php
                         if ($config['homeurl'] != "") {
                             echo '<a href="' . $config['homeurl'] . '" title="Home"><img src="home.png" /></a>';
@@ -176,7 +181,7 @@ if (isset($_GET['info'])) {
     <div style="display: none;">
         <?php
         foreach ($directories as $dir => $path) {
-            $href = '?album=' . rawurlencode($dir);
+            $href = generateImageUrl($dir);
             $title = htmlspecialchars($dir);
             echo "<a href=\"$href\">$title</a>\n";
         }
