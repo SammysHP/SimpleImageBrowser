@@ -173,6 +173,15 @@ if (isset($_GET['info'])) {
             </td>
         </tr>
     </table>
+    <div style="display: none;">
+        <?php
+        foreach ($directories as $dir => $path) {
+            $href = '?album=' . rawurlencode($dir);
+            $title = htmlspecialchars($dir);
+            echo "<a href=\"$href\">$title</a>\n";
+        }
+        ?>
+    </div>
 <?php
 }
 ?>
