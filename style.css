@@ -38,6 +38,12 @@ p a:hover {
 #sidebar {
     width: 223px;
 }
+
+#thumbnav {
+    width: 223px;
+    height: 223px;
+    line-height: 0;
+}
 #thumbnav a {
     float: left;
     display: block;
@@ -56,8 +62,8 @@ p a:hover {
     border: 5px solid #fff;
     margin: 2px;
 }
+
 #thumbnav-paging {
-    clear: both;
     padding-top: 1em;
 }
 #thumbnav-paging div {
@@ -74,6 +80,7 @@ p a:hover {
     float: right;
     margin-right: 1em;
 }
+
 #albumnav {
     width: 200px;
     margin: auto;
