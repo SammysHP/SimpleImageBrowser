@@ -144,9 +144,21 @@ if (isset($_GET['info'])) {
                             $href = generateImageUrl($album, $images[$pagingStart + $config['paginginterval']]);
                             echo "<a href=\"$href\" class=\"next\"><img src=\"arrow-right.png\" /></a>";
                         }
-                        $no = floor($currentIndex / $config['paginginterval']) + 1;
-                        $of = floor(count($images) / $config['paginginterval']) + 1;
-                        echo "<div>$no / $of</div>";
+                        
+                        $currentPageIndex = floor($currentIndex / $config['paginginterval']);
+                        $pageCount = floor(count($images) / $config['paginginterval']) + 1;
+                        echo "<div>";
+                        for ($i = 0; $i < $pageCount; $i++) {
+                            if ($i == $currentPageIndex) {
+                                echo '<img src="bullet-light.png" /> ';
+                            } elseif ($i < $currentPageIndex) {
+                                $index = $i * $config['paginginterval'] + $config['paginginterval'] - 1;
+                                echo '<a href="' . generateImageUrl($album, $images[$index]) . '"><img src="bullet-dark.png" /></a> ';
+                            } else {
+                                echo '<a href="' . generateImageUrl($album, $images[$i * $config['paginginterval']]) . '"><img src="bullet-dark.png" /></a> ';
+                            }
+                        }
+                        echo "</div>";
                         ?>
                     </div>
                     <div id="info">

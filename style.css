@@ -17,14 +17,16 @@ p {
     line-height: 1.2em;
 }
 
-p a, p a:visited {
-    color: #C0DB5A;
+a {
+    color: #aaa;
     text-decoration: none;
 }
 
-p a:hover {
-	color: #C0DB5A;
+p a {
     text-decoration: underline;
+}
+p a:hover {
+    color: #fff;
 }
 
 #sitecontainer {
@@ -68,9 +70,10 @@ p a:hover {
 }
 #thumbnav-paging div {
     margin: auto;
-    margin-top: 0.5em;
-    width: 50%;
+    margin-top: 10px;
+    width: 60%;
     text-align: center;
+    font-size: 10px;
 }
 #thumbnav-paging .back {
     float: left;
