@@ -55,7 +55,7 @@ $config['paginginterval'] = 9;
  * 
  * Values: true, false
  */
-$config['sortDescending'] = true;
+$config['sortdescending'] = true;
 
 
 /**
@@ -76,3 +76,10 @@ $config['info'] = <<<'EOD'
         Displayed with <a href="https://github.com/SammysHP/SimpleImageBrowser">Simple Image Browser</a> by <a href="http://www.sammyshp.de/">Sven Karsten Greiner</a>.
     </p>
 EOD;
+
+/**
+ * Show a white border around the image.
+ * 
+ * Values: true, false
+ */
+$config['imageborder'] = false;

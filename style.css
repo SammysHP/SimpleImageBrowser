@@ -33,6 +33,7 @@ p a:hover {
 #sitecontainer {
     margin: auto;
     margin-top: 1em;
+    margin-bottom: 1em;
 }
 
 #sidebarcontainer {
@@ -156,9 +157,12 @@ p a:hover {
 }
 
 #imagecontainer {
-    height: 805px;
-    width: 805px;
+    height: 845px;
+    width: 845px;
     text-align: center;
+}
+#imagecontainer .imageborder {
+    border: 20px solid #fff;
 }
 #imagecontainer img {
     max-width: 800px;

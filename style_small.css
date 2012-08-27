@@ -1,6 +1,9 @@
 #imagecontainer {
-    height: 605px;
-    width: 605px;
+    height: 635px;
+    width: 635px;
+}
+#imagecontainer .imageborder {
+    border: 15px solid #fff;
 }
 #imagecontainer img {
     max-width: 600px;

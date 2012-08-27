@@ -64,7 +64,7 @@ if ($album == null || !array_key_exists($album, $directories)) {
 }
 
 // Scan directory for image files
-$files = scandir($directories[$album], $config['sortDescending'] ? 1 : 0);
+$files = scandir($directories[$album], $config['sortdescending'] ? 1 : 0);
 $images = array();
 foreach ($files as $file) {
     $f = strtolower($file);
@@ -188,7 +188,7 @@ if (isset($_GET['info'])) {
                         echo "<a href=\"$href\" class=\"navi next\"></a>";
                     }
                     ?>
-                    <img src="<?php echo str_replace('%2F', '/', rawurlencode($directories[$album])) . '/' . rawurlencode($image); ?>" alt="Image" />
+                    <img src="<?php echo str_replace('%2F', '/', rawurlencode($directories[$album])) . '/' . rawurlencode($image); ?>" alt="Image" <?php if ($config['imageborder']) echo 'class="imageborder"'; ?> />
                 </div>
             </td>
         </tr>
