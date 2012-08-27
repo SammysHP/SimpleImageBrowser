@@ -4,11 +4,12 @@
     border: none;
 }
 
-html, body {
+body {
     background: #222;
     color: #ddd;
     font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
     line-height: 1em;
+    cursor: default;
 }
 
 p {
