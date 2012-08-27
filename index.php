@@ -96,7 +96,9 @@ $neighbors = array_slice($images, $pagingStart, $config['paginginterval']);
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title><?php echo $config['sitetitle'] . ((!isset($_GET['info'])) ? (' :: ' . htmlspecialchars($image)) : ' :: Info'); ?></title>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta http-equiv="Content-Script-Type" content="text/javascript" />
     <link rel="stylesheet" type="text/css" href="style.css" />
     <?php if ($smallSize)  echo '<link rel="stylesheet" type="text/css" href="style_small.css" />'; ?>
 </head>
@@ -113,7 +115,7 @@ if (isset($_GET['info'])) {
                     <form action="" method="post" id="albumnav">
                         <input type="submit" name="albumselect" value="" />
                         <div class="select">
-                            <select name="album" type="text" size="1" onchange="this.form.submit()">
+                            <select name="album" size="1" onchange="this.form.submit()">
                                 <?php
                                 foreach ($directories as $dir => $path) {
                                     $selected = ($dir == $album) ? 'selected="selected"' : '';
@@ -126,11 +128,12 @@ if (isset($_GET['info'])) {
                     </form>
                     <div id="thumbnav">
                         <?php
+                        $albumUrl = str_replace('%2F', '/', rawurlencode($directories[$album]));
                         foreach ($neighbors as $neighbor) {
                             $href = generateImageUrl($album, $neighbor);
-                            $src = $directories[$album] . '/' . $neighbor;
+                            $src = $albumUrl . '/' . rawurlencode($neighbor);
                             $current = ($image == $neighbor) ? 'class="current"' : '';
-                            echo "<a href=\"$href\"><img src=\"$src\" $current/></a>";
+                            echo "<a href=\"$href\"><img src=\"$src\" alt=\"\" $current /></a>";
                         }
                         ?>
                     </div>
@@ -138,11 +141,11 @@ if (isset($_GET['info'])) {
                         <?php
                         if ($pagingStart > 0) {
                             $href = generateImageUrl($album, $images[$pagingStart - 1]);
-                            echo "<a href=\"$href\" class=\"back\"><img src=\"arrow-left.png\" /></a>";
+                            echo "<a href=\"$href\" class=\"back\"><img src=\"arrow-left.png\" alt=\"prev\" /></a>";
                         }
                         if ($pagingStart + $config['paginginterval'] < count($images)) {
                             $href = generateImageUrl($album, $images[$pagingStart + $config['paginginterval']]);
-                            echo "<a href=\"$href\" class=\"next\"><img src=\"arrow-right.png\" /></a>";
+                            echo "<a href=\"$href\" class=\"next\"><img src=\"arrow-right.png\" alt=\"next\" /></a>";
                         }
                         
                         $currentPageIndex = floor($currentIndex / $config['paginginterval']);
@@ -150,26 +153,26 @@ if (isset($_GET['info'])) {
                         echo "<div>";
                         for ($i = 0; $i < $pageCount; $i++) {
                             if ($i == $currentPageIndex) {
-                                echo '<img src="bullet-light.png" /> ';
+                                echo '<img src="bullet-light.png" alt="O" /> ';
                             } elseif ($i < $currentPageIndex) {
                                 $index = $i * $config['paginginterval'] + $config['paginginterval'] - 1;
-                                echo '<a href="' . generateImageUrl($album, $images[$index]) . '"><img src="bullet-dark.png" /></a> ';
+                                echo '<a href="' . generateImageUrl($album, $images[$index]) . '"><img src="bullet-dark.png" alt="O" /></a> ';
                             } else {
-                                echo '<a href="' . generateImageUrl($album, $images[$i * $config['paginginterval']]) . '"><img src="bullet-dark.png" /></a> ';
+                                echo '<a href="' . generateImageUrl($album, $images[$i * $config['paginginterval']]) . '"><img src="bullet-dark.png" alt="O" /></a> ';
                             }
                         }
                         echo "</div>";
                         ?>
                     </div>
                     <div id="info">
-                        <a href="?random" title="Random"><img src="random.png" /></a>
-                        <a href="<?php echo generateImageUrl($album, $image); ?>&amp;togglesize" title="Toggle size"><img src="size.png" /></a>
+                        <a href="?random" title="Random"><img src="random.png" alt="Random" /></a>
+                        <a href="<?php echo generateImageUrl($album, $image); ?>&amp;togglesize" title="Toggle size"><img src="size.png" alt="Toggle size" /></a>
                         <?php
                         if ($config['homeurl'] != "") {
-                            echo '<a href="' . $config['homeurl'] . '" title="Home"><img src="home.png" /></a>';
+                            echo '<a href="' . $config['homeurl'] . '" title="Home"><img src="home.png" alt="Home" /></a>';
                         }
                         ?>
-                        <a href="?info" title="Info"><img src="info.png" /></a>
+                        <a href="?info" title="Info"><img src="info.png" alt="Info" /></a>
                     </div>
                 </div>
             </td>
@@ -185,7 +188,7 @@ if (isset($_GET['info'])) {
                         echo "<a href=\"$href\" class=\"navi next\"></a>";
                     }
                     ?>
-                    <img src="<?php echo $directories[$album] . '/' . $image; ?>" />
+                    <img src="<?php echo str_replace('%2F', '/', rawurlencode($directories[$album])) . '/' . rawurlencode($image); ?>" alt="Image" />
                 </div>
             </td>
         </tr>
@@ -203,3 +206,4 @@ if (isset($_GET['info'])) {
 }
 ?>
 </body>
+</html>
