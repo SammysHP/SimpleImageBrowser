@@ -79,10 +79,18 @@ p a:hover {
 #thumbnav-paging .back {
     float: left;
     margin-left: 1em;
+    opacity: 0.30;
+    filter: alpha(opacity=30);
 }
 #thumbnav-paging .next {
     float: right;
     margin-right: 1em;
+    opacity: 0.30;
+    filter: alpha(opacity=30);
+}
+#thumbnav-paging .back:hover, #thumbnav-paging .next:hover {
+    opacity: 1;
+    filter: alpha(opacity=100);
 }
 
 #albumnav {
@@ -115,13 +123,19 @@ p a:hover {
 
 #info {
     clear: both;
-    border-top: 1px solid #aaa;
+    border-top: 1px solid #3a3a3a;
     margin-top: 3em;
     padding-top: 0.5em;
     text-align: center;
 }
 #info a {
     margin: 0 0.8em;
+    opacity: 0.30;
+    filter: alpha(opacity=30);
+}
+#info a:hover {
+    opacity: 1;
+    filter: alpha(opacity=100);
 }
 
 #infobox {
