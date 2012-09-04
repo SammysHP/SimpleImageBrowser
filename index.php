@@ -30,37 +30,36 @@ function generateImageUrl($album, $image = null, $html = true) {
     return $url;
 }
 
+// Redirect to selected album
 if (isset($_POST['album'])) {
     header('Location: ' . generateImageUrl($_POST['album']));
     die();
 }
 
 $directories = $config['albums'];
-$random = false;
 
 $album = $_GET['album'];
 $image = $_GET['image'];
 
+$random = isset($_GET['random']) || ($album == null && $image == null);
+$startpage = !isset($_GET['random']) && $album == null && $image == null;
+
 $smallSize = (boolean) $_SESSION['smallsize'];
+
+// Redirect to same image after changing size
+// Case album == null is handled by next GET
 if (isset($_GET['togglesize'])) {
     $_SESSION['smallsize'] = !$smallSize;
     header('Location: ' . generateImageUrl($album, $image, false));
     die();
 }
 
-// Random image if no album and no image given or $_GET['random']
-if (isset($_GET['random']) || ($album == null && $image == null)) {
+// Validate given album or use random one
+if ($random) {
+    $album = array_rand($directories);
+} elseif (!array_key_exists($album, $directories)) {
     $random = true;
-}
-
-// Validate given album or use first or random one
-if ($album == null || !array_key_exists($album, $directories)) {
-    if ($random) {
-        $album = array_rand($directories);
-    } else {
-        reset($directories);
-        $album = key($directories);
-    }
+    $album = array_rand($directories);
 }
 
 // Scan directory for image files
@@ -78,12 +77,19 @@ foreach ($files as $file) {
 }
 
 // Validate given image or use first or random one in album
-if ($image == null || !in_array($image, $images)) {
-    if ($random) {
-        $image = $images[array_rand($images)];
-    } else {
-        $image = $images[0];
-    }
+if ($random) {
+    $image = $images[array_rand($images)];
+} elseif ($image == null) {
+    $image = $images[0];
+} elseif (!in_array($image, $images)) {
+    $random = true;
+    $image = $images[array_rand($images)];
+}
+
+// Redirect to new image
+if ($random && !$startpage) {
+    header('Location: ' . generateImageUrl($album, $image, false));
+    die();
 }
 
 // Calculate paging boundaries
