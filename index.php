@@ -101,7 +101,24 @@ $neighbors = array_slice($images, $pagingStart, $config['paginginterval']);
      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title><?php echo $config['sitetitle'] . ((!isset($_GET['info'])) ? (' :: ' . htmlspecialchars($image)) : ' :: Info'); ?></title>
+    <?php
+    echo '<title>';
+    echo $config['sitetitle'];
+    if (isset($_GET['info'])) {
+        echo ' :: Info';
+    } elseif (!$startpage) {
+        echo ' :: ' . htmlspecialchars($image);
+    }
+    echo '</title>';
+    
+    if ($config['metadescription'] != "") {
+        echo '<meta name="description" content="' . $config['metadescription'] . '" />';
+    }
+    
+    if ($config['metakeywords'] != "") {
+        echo '<meta name="keywords" content="' . $config['metakeywords'] . '" />';
+    }
+    ?>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="Content-Style-Type" content="text/css" />
     <meta http-equiv="Content-Script-Type" content="text/javascript" />

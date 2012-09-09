@@ -40,6 +40,22 @@ $config['sitetitle'] = 'Simple Image Browser';
 
 
 /**
+ * Description used in the html meta tag.
+ * 
+ * Values: string
+ */
+$config['metadescription'] = '';
+
+
+/**
+ * Keywords used in the html meta tag.
+ * 
+ * Values: string
+ */
+$config['metakeywords'] = '';
+
+
+/**
  * Number of thumbnails next to the image. A value of n*3 looks best.
  * Do not use high numbers because all images are loaded by the client (no
  * thumbnail generation).
