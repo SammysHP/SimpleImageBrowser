@@ -12,22 +12,9 @@ body {
     cursor: default;
 }
 
-p {
-    margin-bottom: 1em;
-    text-align: justify;
-    line-height: 1.2em;
-}
-
 a {
     color: #aaa;
     text-decoration: none;
-}
-
-p a {
-    text-decoration: underline;
-}
-p a:hover {
-    color: #fff;
 }
 
 #sitecontainer {
@@ -154,6 +141,21 @@ p a:hover {
     position: absolute;
     top: 1em;
     right: 2em;
+}
+#infobox .hr {
+    margin: 3em 40%;
+    border-top: 1px dotted #555;
+}
+#infobox p {
+    margin-bottom: 1.5em;
+    text-align: justify;
+    line-height: 1.5em;
+}
+#infobox p a {
+    text-decoration: underline;
+}
+#infobox p a:hover {
+    color: #fff;
 }
 
 #imagecontainer {
