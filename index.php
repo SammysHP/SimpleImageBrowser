@@ -30,13 +30,39 @@ function generateImageUrl($album, $image = null, $html = true) {
     return $url;
 }
 
+function directoryScanner($directory) {
+    $result = array();
+    $containsImage = false;
+    $content = scandir($directory);
+    
+    foreach ($content as $entry) {
+        if (strstr($entry, ".jpg")
+                || strstr($entry, ".jpeg")
+                || strstr($entry, ".png")
+                || strstr($entry, ".gif")) {
+            $containsImage = true;
+        }
+        
+        if (is_dir($directory . '/' . $entry) && substr($entry, 0, 1) != ".") {
+            $result = $result + directoryScanner($directory . '/' . $entry);
+        }
+    }
+    
+    if ($containsImage) {
+        $title = substr(strrchr("/" . $directory, "/"), 1);
+        $result[$title] = $directory;
+    }
+    
+    return $result;
+}
+
 // Redirect to selected album
 if (isset($_POST['album'])) {
     header('Location: ' . generateImageUrl($_POST['album']));
     die();
 }
 
-$directories = $config['albums'];
+$directories = $config['autodetect'] ? directoryScanner($config['autodetectroot']) : $config['albums'];
 
 $album = $_GET['album'];
 $image = $_GET['image'];

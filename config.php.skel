@@ -4,7 +4,10 @@
  * If true, this script tries to find all directories in "autodetectroot".
  * (See next option "autodetectroot".)
  * 
- * WARNING: Not yet implemented!
+ * WARNING: Scans all subdirectories of $config['autodetectroot'] on each
+ *          request!
+ * 
+ *          Experimental, use with care!
  * 
  * Values: true, false
  */
